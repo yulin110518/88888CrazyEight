@@ -1,1 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-serif-sc: "Noto Serif SC", serif;
+  --font-calligraphy: "Ma Shan Zheng", cursive;
+}
+
+.fengshui-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://picsum.photos/id/1015/1920/1080?grayscale');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.fengshui-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.ink-wash {
+  mask-image: radial-gradient(circle, black 50%, transparent 100%);
+}
+

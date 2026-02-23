@@ -28,17 +28,17 @@ const SUITS: Suit[] = ['hearts', 'diamonds', 'clubs', 'spades'];
 const RANKS: Rank[] = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
 const SUIT_ICONS = {
-  hearts: <Heart className="w-full h-full text-red-500 fill-red-500" />,
-  diamonds: <Diamond className="w-full h-full text-red-500 fill-red-500" />,
-  clubs: <Club className="w-full h-full text-slate-800 fill-slate-800" />,
-  spades: <Spade className="w-full h-full text-slate-800 fill-slate-800" />,
+  hearts: <Heart className="w-full h-full text-rose-500 fill-rose-500" />,
+  diamonds: <Diamond className="w-full h-full text-amber-500 fill-amber-500" />,
+  clubs: <Club className="w-full h-full text-emerald-600 fill-emerald-600" />,
+  spades: <Spade className="w-full h-full text-sky-700 fill-sky-700" />,
 };
 
 const SUIT_COLORS = {
-  hearts: 'text-red-600',
-  diamonds: 'text-red-600',
-  clubs: 'text-slate-900',
-  spades: 'text-slate-900',
+  hearts: 'text-rose-600',
+  diamonds: 'text-amber-600',
+  clubs: 'text-emerald-700',
+  spades: 'text-sky-800',
 };
 
 // --- Helper Functions ---
@@ -81,9 +81,12 @@ const Card = ({
   key?: React.Key;
 }) => {
   const cardContent = isFaceUp && card ? (
-    <div className={`relative w-full h-full bg-white rounded-lg border-2 ${isPlayable ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-slate-200'} flex flex-col p-1 sm:p-2 select-none`}>
-      <div className={`flex flex-col items-center self-start ${SUIT_COLORS[card.suit]}`}>
-        <span className="text-xs sm:text-sm font-bold leading-none">{card.rank}</span>
+    <div className={`relative w-full h-full bg-[#fdfaf1] rounded-lg border-2 ${isPlayable ? 'border-amber-500 shadow-lg shadow-amber-500/50 scale-105' : 'border-stone-300'} flex flex-col p-1 sm:p-2 select-none overflow-hidden`}>
+      {/* Subtle paper texture overlay */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]"></div>
+      
+      <div className={`flex flex-col items-center self-start ${SUIT_COLORS[card.suit]} z-10`}>
+        <span className="text-xs sm:text-sm font-serif-sc font-bold leading-none">{card.rank}</span>
         <div className="w-2 h-2 sm:w-3 sm:h-3">{SUIT_ICONS[card.suit]}</div>
       </div>
       
@@ -91,18 +94,26 @@ const Card = ({
         {SUIT_ICONS[card.suit]}
       </div>
 
-      <div className={`flex flex-col items-center self-end rotate-180 ${SUIT_COLORS[card.suit]}`}>
-        <span className="text-xs sm:text-sm font-bold leading-none">{card.rank}</span>
+      <div className={`flex flex-col items-center self-end rotate-180 ${SUIT_COLORS[card.suit]} z-10`}>
+        <span className="text-xs sm:text-sm font-serif-sc font-bold leading-none">{card.rank}</span>
         <div className="w-2 h-2 sm:w-3 sm:h-3">{SUIT_ICONS[card.suit]}</div>
       </div>
     </div>
   ) : (
-    <div className="w-full h-full bg-indigo-700 rounded-lg border-2 border-indigo-900 flex items-center justify-center p-1 sm:p-2">
-      <div className="w-full h-full border border-indigo-400/30 rounded flex items-center justify-center">
-        <div className="w-8 h-8 sm:w-12 sm:h-12 opacity-20 text-white">
-          <RotateCcw className="w-full h-full" />
+    <div className="w-full h-full bg-[#1a1a1a] rounded-lg border-2 border-amber-600/50 flex items-center justify-center p-1 sm:p-2 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-40 bg-[url('https://picsum.photos/id/1016/400/600?grayscale')] bg-cover bg-center"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-amber-900/40 to-transparent"></div>
+      <div className="w-full h-full border border-amber-500/30 rounded flex items-center justify-center z-10">
+        <div className="flex flex-col items-center text-amber-500/60">
+          <div className="font-calligraphy text-3xl sm:text-5xl drop-shadow-lg">泰山</div>
+          <div className="text-[8px] sm:text-[10px] uppercase tracking-[0.3em] font-serif-sc mt-1">Mount Tai</div>
         </div>
       </div>
+      {/* Decorative corners */}
+      <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-amber-500/40"></div>
+      <div className="absolute top-1 right-1 w-2 h-2 border-t border-r border-amber-500/40"></div>
+      <div className="absolute bottom-1 left-1 w-2 h-2 border-b border-l border-amber-500/40"></div>
+      <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-amber-500/40"></div>
     </div>
   );
 
@@ -263,37 +274,37 @@ export default function App() {
 
   const renderSuitIcon = (suit: Suit) => {
     switch(suit) {
-      case 'hearts': return <Heart className="w-6 h-6 text-red-500 fill-red-500" />;
-      case 'diamonds': return <Diamond className="w-6 h-6 text-red-500 fill-red-500" />;
-      case 'clubs': return <Club className="w-6 h-6 text-slate-800 fill-slate-800" />;
-      case 'spades': return <Spade className="w-6 h-6 text-slate-800 fill-slate-800" />;
+      case 'hearts': return <Heart className="w-6 h-6 text-rose-500 fill-rose-500" />;
+      case 'diamonds': return <Diamond className="w-6 h-6 text-amber-500 fill-amber-500" />;
+      case 'clubs': return <Club className="w-6 h-6 text-emerald-600 fill-emerald-600" />;
+      case 'spades': return <Spade className="w-6 h-6 text-sky-700 fill-sky-700" />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-emerald-900 text-white font-sans selection:bg-emerald-700 overflow-hidden flex flex-col">
+    <div className="min-h-screen fengshui-bg text-stone-100 font-serif-sc selection:bg-amber-900/50 overflow-hidden flex flex-col">
       {/* Header */}
-      <header className="p-4 bg-black/20 backdrop-blur-md flex justify-between items-center border-b border-white/10">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-black font-bold text-xl shadow-lg">
-            8
+      <header className="p-4 bg-black/40 backdrop-blur-md flex justify-between items-center border-b border-amber-500/20">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-black font-calligraphy text-2xl shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+            八
           </div>
-          <h1 className="text-xl font-bold tracking-tight hidden sm:block">Tina's Crazy Eights</h1>
+          <h1 className="text-xl font-bold tracking-widest font-calligraphy text-amber-100 hidden sm:block">泰山风水 · 疯狂八点</h1>
         </div>
         
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full">
-            <Cpu className="w-4 h-4 text-emerald-400" />
+          <div className="flex items-center gap-2 bg-black/30 px-3 py-1 rounded-full border border-amber-500/20">
+            <Cpu className="w-4 h-4 text-amber-400" />
             <span className="text-sm font-medium">{aiHand.length}</span>
           </div>
-          <div className="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full">
-            <User className="w-4 h-4 text-emerald-400" />
+          <div className="flex items-center gap-2 bg-black/30 px-3 py-1 rounded-full border border-amber-500/20">
+            <User className="w-4 h-4 text-amber-400" />
             <span className="text-sm font-medium">{playerHand.length}</span>
           </div>
           <button 
             onClick={initGame}
-            className="p-2 hover:bg-white/10 rounded-full transition-colors"
-            title="Restart Game"
+            className="p-2 hover:bg-white/10 rounded-full transition-colors text-amber-400"
+            title="重新开始"
           >
             <RotateCcw className="w-5 h-5" />
           </button>
@@ -358,9 +369,9 @@ export default function App() {
           </div>
 
           {/* Status Message */}
-          <div className="bg-black/30 backdrop-blur-sm px-6 py-2 rounded-full border border-white/10 flex items-center gap-3">
-            <div className={`w-2 h-2 rounded-full ${turn === 'player' ? 'bg-emerald-400 animate-pulse' : 'bg-slate-500'}`} />
-            <p className="text-sm sm:text-base font-medium text-emerald-50">{message}</p>
+          <div className="bg-black/50 backdrop-blur-sm px-6 py-2 rounded-full border border-amber-500/30 flex items-center gap-3 shadow-2xl">
+            <div className={`w-2 h-2 rounded-full ${turn === 'player' ? 'bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.8)]' : 'bg-stone-600'}`} />
+            <p className="text-sm sm:text-base font-medium text-amber-50 tracking-wide">{message}</p>
           </div>
         </div>
 
@@ -472,32 +483,45 @@ export default function App() {
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-emerald-950 p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0a0a] p-4"
           >
-            <div className="max-w-md w-full text-center">
+            {/* Background Image for Start Screen - Traditional Painting Style */}
+            <div className="absolute inset-0 opacity-60 bg-[url('https://picsum.photos/id/1015/1920/1080?grayscale')] bg-cover bg-center"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black"></div>
+            <div className="absolute inset-0 bg-[#3d2b1f]/20 mix-blend-sepia"></div>
+
+            <div className="max-w-md w-full text-center relative z-10">
               <motion.div 
-                initial={{ y: -20 }}
-                animate={{ y: 0 }}
-                className="mb-8 relative"
+                initial={{ y: -30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className="mb-12"
               >
-                <div className="absolute inset-0 bg-yellow-400 blur-3xl opacity-20"></div>
-                <h1 className="text-6xl font-black tracking-tighter uppercase relative">
-                  Crazy<br/><span className="text-yellow-400">Eights</span>
+                <div className="font-calligraphy text-amber-500 text-3xl mb-4 tracking-[0.8em] opacity-80">泰山石敢当</div>
+                <h1 className="text-8xl font-black tracking-tighter uppercase text-white drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] flex flex-col items-center">
+                  <span className="text-2xl font-serif-sc tracking-[1em] mb-2 opacity-60">FENG SHUI</span>
+                  <div className="flex items-center gap-4">
+                    <span className="font-calligraphy">泰山</span>
+                    <span className="text-amber-500 font-calligraphy">八点</span>
+                  </div>
                 </h1>
+                <div className="h-[2px] w-48 bg-gradient-to-r from-transparent via-amber-600 to-transparent mx-auto mt-6"></div>
               </motion.div>
               
-              <div className="space-y-4 mb-12 text-emerald-300/80 text-sm">
-                <p>Match the suit or rank of the top card.</p>
-                <p>8s are wild—play them anytime!</p>
-                <p>Be the first to empty your hand to win.</p>
+              <div className="space-y-6 mb-16 text-stone-200 text-xl font-serif-sc leading-relaxed">
+                <p className="tracking-[0.3em] drop-shadow-md">五行轮转 · 顺天应时</p>
+                <p className="tracking-[0.2em] text-amber-400/90 italic">“八”为乾坤之变，可定风水之局。</p>
+                <p className="tracking-[0.3em] opacity-80">登泰山而小天下，清残牌而定胜负。</p>
               </div>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(217,119,6,0.5)" }}
+                whileTap={{ scale: 0.95 }}
                 onClick={initGame}
-                className="w-full bg-white text-black py-4 rounded-2xl font-bold text-xl hover:bg-yellow-400 transition-all shadow-xl"
+                className="w-full bg-gradient-to-b from-amber-600 to-amber-800 text-white py-5 rounded-lg font-bold text-2xl hover:from-amber-500 hover:to-amber-700 transition-all shadow-2xl border border-amber-400/40 tracking-[0.5em] font-calligraphy"
               >
-                Start Game
-              </button>
+                开启征程
+              </motion.button>
             </div>
           </motion.div>
         )}
